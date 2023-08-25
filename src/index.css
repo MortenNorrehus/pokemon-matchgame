@@ -1,0 +1,68 @@
+@font-face {
+  font-family: "Pokemon";
+  src: url("/font-solid-webfont.woff2") format("woff2");
+}
+
+img {
+  width: 100%;
+}
+
+body {
+  height: 100vh;
+  background-image: url("/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.board {
+  display: flex;
+  justify-content: center;
+}
+
+.innerBoard {
+  display: inline-grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  place-items: center;
+  gap: 10px;
+  perspective: 800px;
+}
+
+.card {
+  width: 150px;
+  height: 150px;
+  padding: 1em;
+  position: relative;
+  transition: 1s ease-in-out;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.front,
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 20px;
+}
+
+.card__face {
+  backface-visibility: hidden;
+  transition: 1s ease-in-out;
+  -webkit-box-reflect: below 0
+    linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
+}
+
+.front {
+  background: #000;
+  padding: 2rem;
+}
+
+.rotated.card {
+  transform: rotateY(0.5turn);
+}
+
+.back {
+  transform: rotateY(0.5turn);
+}
