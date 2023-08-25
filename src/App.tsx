@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
 import { BoardGame } from "./components/BoardGame";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./App.css";
-import { fetchPokemon } from "./components/fetchPokemon";
 
 const queryClient = new QueryClient({
   defaultOptions: {

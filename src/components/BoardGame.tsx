@@ -2,32 +2,35 @@ import { Card } from "./Card";
 import { fetchPokemon } from "./fetchPokemon";
 import { useState, useEffect } from "react";
 
-const fetch = await fetchPokemon();
+type Pokemon = {
+  id: number;
+};
 
 export const BoardGame = () => {
-  const [pokemons, setPokemons] = useState();
+  const [pokemons, setPokemons] = useState<Pokemon[]>();
   const [rotated, setRotated] = useState([]);
 
   useEffect(() => {
-    setPokemons(fetch);
+    const loadPokemons = async () => {
+      const fetch = await fetchPokemon();
+      setPokemons(fetch);
+    };
+    loadPokemons();
   }, []);
 
   useEffect(() => {
     checkForPairs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rotated]);
 
   const checkForPairs = () => {
     if (rotated.length > 0 && rotated[0] == rotated[1]) {
-      console.log("Winner");
       setRotated([]);
     }
 
     if (rotated.length == 2 && rotated[0] != rotated[1]) {
-      console.log("no match");
-
       setTimeout(() => {
         rotated.forEach((item) => {
-          console.log(item);
           document.querySelectorAll(`[data-id="${item}"]`).forEach((item) => {
             item.classList.remove("rotated");
           });
@@ -39,18 +42,16 @@ export const BoardGame = () => {
     console.log(rotated);
   };
 
-  const handlePairs = (id) => {
+  const handlePairs = (id: number) => {
     setRotated([...rotated, id]);
   };
 
-  const handleFlip = () => {};
-
-  const handleFoundPairs = () => {};
+  console.log(pokemons);
 
   return (
     <div className="board">
       <div className="innerBoard">
-        {pokemons?.map((item: object, index: number) => {
+        {pokemons?.map((item, index: number) => {
           return (
             <Card
               pokemon={item}

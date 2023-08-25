@@ -1,5 +1,4 @@
 import pokeball from "/Pokeball.svg";
-import { useState } from "react";
 
 export const Card = ({ pokemon, handlePairs }) => {
   const details = {
@@ -10,7 +9,7 @@ export const Card = ({ pokemon, handlePairs }) => {
   };
   console.log(pokemon);
 
-  const handleRotate = (e) => {
+  const handleRotate = (e: React.MouseEvent<HTMLElement>) => {
     console.log(e.currentTarget);
 
     handlePairs(e.currentTarget.dataset.id);
